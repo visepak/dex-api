@@ -1,0 +1,30 @@
+import { Order, OrderError, OrderState, OrderType } from '../../order.schema';
+
+export const OrderStub: Order = {
+  watchId: '0',
+  price: 1.1,
+  state: OrderState.ACTIVE,
+  orderError: OrderError.NoError,
+  orderType: OrderType.BuyLimit,
+  expiration: 1666108568772,
+  orderHash: 'test hash',
+  maker: '0xb794f5ea0ba39494ce839613fffba74279579268',
+  makerUsername: 'Test user',
+  taker: '0x4jd4f5ea0ba39494ce839613fffba74279579975',
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  signature: 'test signature',
+  shares: 1000,
+  remainingShares: 1000,
+  remainingSharesEvent: 1,
+  orderData: {
+    salt: 'test salt',
+    orderType: '0',
+    watchId: '0',
+    maker: '0xb794f5ea0ba39494ce839613fffba74279579268',
+    taker: '0x4jd4f5ea0ba39494ce839613fffba74279579975',
+    shares: '1000',
+    price: '1100000',
+    expiration: '1666108568772',
+  },
+};

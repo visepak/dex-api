@@ -1,0 +1,39 @@
+version: '3'
+services:
+#  nginx:
+#    image: nginx
+#    restart: always
+#    ports:
+#      - "443:443"
+#    volumes:
+#      - ./nginx/wcn.conf:/etc/nginx/templates/default.conf.template
+#      - ./keys:/etc/nginx/cert
+
+  redis:
+    image: bitnami/redis:7.0
+    restart: always
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "127.0.0.1:6379:6379"
+    volumes:
+      - ../redis-data/data:/data
+
+  mongodb:
+    image: mongo:5.0.8
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${WCN_DB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${WCN_DB_PASSWORD}
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - ../mongo-data:/data/db
+
+  back:
+    build: .
+    ports:
+      - "127.0.0.1:3001:3001"
+    depends_on:
+      - redis
+      - mongodb
